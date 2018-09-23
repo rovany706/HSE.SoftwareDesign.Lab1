@@ -42,9 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Identifiers\Class.cs" />
+    <Compile Include="Identifiers\Constant.cs" />
+    <Compile Include="Identifiers\Identifier.cs" />
+    <Compile Include="Identifiers\Method.cs" />
+    <Compile Include="LinearList.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Identifiers\Var.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
