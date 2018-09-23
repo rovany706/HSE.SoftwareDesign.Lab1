@@ -1,29 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HSE.SD.Lab1.Identifiers
+﻿namespace HSE.SD.Lab1.Identifiers
 {
-    public enum UsageType
-    {
-        CLASSES,
-        CONSTS,
-        VARS,
-        METHODS
-    };
-
-    public enum Type
-    {
-        int_type,
-        float_type,
-        bool_type,
-        char_type,
-        string_type,
-        class_type
-    };
-
     public abstract class Identifier
     {
         //Fields

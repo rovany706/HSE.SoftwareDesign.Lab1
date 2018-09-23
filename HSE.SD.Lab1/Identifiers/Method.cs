@@ -1,24 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HSE.SD.Lab1;
-
 namespace HSE.SD.Lab1.Identifiers
 {
-    enum ParameterType
-    {
-        param_val,
-        param_ref,
-        param_out
-    };
-
     public class Method : Identifier
     {
         public LinearList Parameters;
 
-        public Method(string name, string type, string usageType, Tuple<string, string>[] parameters) 
+        //Tuple<string type, string usageType>
+        public Method(string name, string type, string usageType, Tuple<string, ParameterType>[] parameters) 
             : base(name, type, usageType)
         {
             if (parameters.Length == 0)
