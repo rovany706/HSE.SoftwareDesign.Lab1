@@ -15,7 +15,7 @@
 
 ### Пример
 
-```
+```csharp
 int a;
 const float c = 10;
 class MyClass;
