@@ -20,11 +20,20 @@ namespace HSE.SD.Lab1
                 //Method parse
                 if (Regex.IsMatch(line, MethodRegexPattern))
                 {
+                    Method method;
                     Regex regex = new Regex(MethodRegexPattern);
                     Match match = regex.Match(line);
 
                     string name = match.Groups["name"].Value;
                     string type = match.Groups["type"].Value;
+
+                    //If no parameters
+                    if (match.Groups["params"].Value == String.Empty)
+                    {
+                        method = new Method(name, type, "method", null);
+                        root = Node.Add(root, method);
+                        continue;
+                    }
 
                     //Parse parameters
                     string[] parameters = match.Groups["params"].Value.Split(',');
@@ -56,7 +65,7 @@ namespace HSE.SD.Lab1
                         parametersArray[i] = parameter;
                     }
 
-                    Method method = new Method(name, type, "method", parametersArray);
+                    method = new Method(name, type, "method", parametersArray);
                     root = Node.Add(root, method);
                 }
                 //Const parse
@@ -82,7 +91,10 @@ namespace HSE.SD.Lab1
                         else
                             value = true;
                     }
-                    else //char
+                    else 
+                        //char
+                        // "   c   "
+                        //[0] [1] [2]
                         value = match.Groups["value"].Value[1];
 
                     Constant constant = new Constant(name, type, "const", value);
