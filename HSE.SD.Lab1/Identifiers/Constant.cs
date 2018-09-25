@@ -2,9 +2,9 @@
 {
     public class Constant : Identifier
     {
-        public float Value;
+        public object Value;
 
-        public Constant(string name, string type, string usageType, float value) : base(name, type, usageType)
+        public Constant(string name, string type, string usageType, object value) : base(name, type, usageType)
         {
             Value = value;
         }

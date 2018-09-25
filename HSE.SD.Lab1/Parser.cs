@@ -7,7 +7,7 @@ namespace HSE.SD.Lab1
     public static class Parser
     {
         private static string VarRegexPattern = @"^(?<type>\w+)\s(?<name>\w+);$";
-        private static string ConstRegexPattern = @"^const\s(?<type>\w+)\s(?<name>\w+)\s=\s(?<value>[a-zA-Z0-9]+);$";
+        private static string ConstRegexPattern = @"^const\s(?<type>\w+)\s(?<name>\w+)\s=\s(?<value>[a-zA-Z0-9\.'""]+);$";
         private static string ClassRegexPattern = @"^class\s(?<name>\w+);$";
         private static string MethodRegexPattern = @"^(?<type>\w+)\s(?<name>\w+)\((?<params>.*)\);$";
         private static string MethodParamsRegexPattern = @"((?<paramType>\w+)\s)?(?<type>\w+)\s\w+";
@@ -50,7 +50,7 @@ namespace HSE.SD.Lab1
                                     parameterUsageType = ParameterType.param_out;
                                     break;
                             }
-                        
+
 
                         Tuple<string, ParameterType> parameter = new Tuple<string, ParameterType>(parameterType, parameterUsageType);
                         parametersArray[i] = parameter;
@@ -67,7 +67,23 @@ namespace HSE.SD.Lab1
 
                     string name = match.Groups["name"].Value;
                     string type = match.Groups["type"].Value;
-                    float value = float.Parse(match.Groups["value"].Value);//TODO mb proverit' nado
+
+                    object value;
+                    if (type == "float")
+                        value = float.Parse(match.Groups["value"].Value.Replace('.', ','));
+                    else if (type == "int")
+                        value = int.Parse(match.Groups["value"].Value);
+                    else if (type == "string")
+                        value = match.Groups["value"].Value.Replace(@"""", string.Empty);
+                    else if (type == "bool")
+                    {
+                        if (match.Groups["value"].Value == "false")
+                            value = false;
+                        else
+                            value = true;
+                    }
+                    else //char
+                        value = match.Groups["value"].Value[1];
 
                     Constant constant = new Constant(name, type, "const", value);
                     root = Node.Add(root, constant);
